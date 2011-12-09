@@ -22,7 +22,7 @@ module.exports = function(bot, module) {
 		var req = http.request(options, function(res) {
 			if (res.statusCode === 201) {
 				request.reply = res.headers.location
-				bot.respond(request);
+				bot.reply(request);
 			}
 			else if (res.statusCode === 422) {
 				var body = '';
@@ -32,12 +32,12 @@ module.exports = function(bot, module) {
 				res.on('end', function() {
 					request.reply = body;
 				});
-				bot.respond(request);
+				bot.reply(request);
 			}
 		});
 		req.on('error', function(error) {
 			request.reply = 'Unable to create a short url.';
-			bot.respond(request);
+			bot.reply(request);
 		});
 		
 		req.write(stringData + "\n");
